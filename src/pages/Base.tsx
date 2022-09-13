@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { IPizza } from '../interfaces';
 
@@ -11,7 +12,12 @@ const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
   const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
 
   return (
-    <div className="base container">
+    <motion.div
+      initial={{ x: '100vw' }}
+      animate={{ x: 0 }}
+      transition={{ type: 'spring', stiffness: 120 }}
+      className="base container"
+    >
       <h3>Step 1: Choose Your Base</h3>
       <ul>
         {bases.map((base) => {
@@ -27,11 +33,18 @@ const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
       {pizza.base && (
         <div className="next">
           <Link to="/toppings">
-            <button>Next</button>
+            <motion.button
+              initial={{ x: '-100vw' }}
+              animate={{
+                x: 0,
+              }}
+            >
+              Next
+            </motion.button>
           </Link>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
