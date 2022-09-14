@@ -8,6 +8,21 @@ interface ToppingsProps {
   pizza: IPizza;
 }
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw',
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 120,
+    },
+  },
+};
+
 const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
   let toppings = [
     'mushrooms',
@@ -19,7 +34,12 @@ const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
   ];
 
   return (
-    <div className="toppings container">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      className="toppings container"
+    >
       <h3>Step 2: Choose Toppings</h3>
       <ul>
         {toppings.map((topping) => {
@@ -51,7 +71,7 @@ const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
           Order
         </motion.button>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

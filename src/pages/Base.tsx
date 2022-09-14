@@ -8,14 +8,41 @@ interface BaseProps {
   pizza: IPizza;
 }
 
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw',
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 120,
+    },
+  },
+};
+
+const nextVariants = {
+  hidden: {
+    x: '-100vw',
+  },
+  visible: {
+    x: 0,
+  },
+};
+
 const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
   const bases = ['Classic', 'Thin & Crispy', 'Thick Crust'];
 
   return (
     <motion.div
-      initial={{ x: '100vw' }}
-      animate={{ x: 0 }}
-      transition={{ type: 'spring', stiffness: 120 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      // initial={{ x: '100vw' }}
+      // animate={{ x: 0 }}
+      // transition={{ type: 'spring', stiffness: 120 }}
       className="base container"
     >
       <h3>Step 1: Choose Your Base</h3>
@@ -46,10 +73,11 @@ const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
                 scale: 1.1,
                 boxShadow: '0px 0px 8px rgb(255, 255, 255)',
               }}
-              initial={{ x: '-100vw' }}
-              animate={{
-                x: 0,
-              }}
+              variants={nextVariants}
+              // initial={{ x: '-100vw' }}
+              // animate={{
+              //   x: 0,
+              // }}
             >
               Next
             </motion.button>
