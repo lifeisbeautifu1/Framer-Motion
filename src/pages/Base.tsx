@@ -21,14 +21,26 @@ const containerVariants = {
       stiffness: 120,
     },
   },
+  exit: {
+    x: '-100vh',
+    transition: { ease: 'easeInOut' },
+  },
 };
 
-const nextVariants = {
+const buttonVariants = {
   hidden: {
     x: '-100vw',
   },
   visible: {
     x: 0,
+  },
+  hover: {
+    scale: 1.1,
+    boxShadow: '0px 0px 8px rgb(255, 255, 255)',
+    transition: {
+      duration: 0.3,
+      yoyo: Infinity,
+    },
   },
 };
 
@@ -40,6 +52,7 @@ const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
       // initial={{ x: '100vw' }}
       // animate={{ x: 0 }}
       // transition={{ type: 'spring', stiffness: 120 }}
@@ -69,11 +82,10 @@ const Base: React.FC<BaseProps> = ({ addBase, pizza }) => {
         <div className="next">
           <Link to="/toppings">
             <motion.button
-              whileHover={{
-                scale: 1.1,
-                boxShadow: '0px 0px 8px rgb(255, 255, 255)',
-              }}
-              variants={nextVariants}
+              variants={buttonVariants}
+              whileHover="hover"
+              initial="hidden"
+              animate="visible"
               // initial={{ x: '-100vw' }}
               // animate={{
               //   x: 0,

@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 import { IPizza } from '../interfaces';
 
 interface OrderProps {
   pizza: IPizza;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const containerVariants = {
@@ -22,6 +24,10 @@ const containerVariants = {
       mass: 0.4,
     },
   },
+  exit: {
+    x: '-100vh',
+    transition: { ease: 'easeInOut' },
+  },
 };
 
 const childVariants = {
@@ -33,12 +39,19 @@ const childVariants = {
   },
 };
 
-const Order = ({ pizza }: OrderProps) => {
+const Order = ({ pizza, setShowModal }: OrderProps) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowModal(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [setShowModal]);
   return (
     <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
       className="container order"
     >
       <h2>Thank you for your order :)</h2>

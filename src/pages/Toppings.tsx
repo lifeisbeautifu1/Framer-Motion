@@ -21,6 +21,27 @@ const containerVariants = {
       stiffness: 120,
     },
   },
+  exit: {
+    x: '-100vh',
+    transition: { ease: 'easeInOut' },
+  },
+};
+
+const buttonVariants = {
+  hidden: {
+    x: '-100vw',
+  },
+  visible: {
+    x: 0,
+  },
+  hover: {
+    scale: 1.1,
+    boxShadow: '0px 0px 8px rgb(255, 255, 255)',
+    transition: {
+      duration: 0.3,
+      yoyo: Infinity,
+    },
+  },
 };
 
 const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
@@ -38,6 +59,7 @@ const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
       className="toppings container"
     >
       <h3>Step 2: Choose Toppings</h3>
@@ -61,12 +83,7 @@ const Toppings = ({ addTopping, pizza }: ToppingsProps) => {
       </ul>
 
       <Link to="/order">
-        <motion.button
-          whileHover={{
-            scale: 1.1,
-            boxShadow: '0px 0px 8px rgb(255, 255, 255)',
-          }}
-        >
+        <motion.button variants={buttonVariants} whileHover="hover">
           {' '}
           Order
         </motion.button>
