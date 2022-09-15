@@ -148,3 +148,10 @@ body {
   font-weight: bold;
   color: #444;
 }
+.loader {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  margin: 40px auto;
+}
